@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class Employee {
 
-    private String id= UUID.randomUUID().toString();
+    private String id;
     private String name;
     private String title;
     private List<String> linkedEmployeeIDs= new ArrayList<>();

@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.example3.CompanyManagement;
 import org.example.example3.Employee;
+import org.example.example5.LRUCache;
 
 public class Main {
     public static void main(String[] args) {
@@ -99,6 +100,27 @@ public class Main {
 //        companyManagement.toplamBagliCalisanSayisi("C1");
 //        companyManagement.toplamBagliCalisanSayisi("M2");
 //        companyManagement.toplamBagliCalisanSayisi("U5");
+
+
+
+//       //  Cache
+
+        LRUCache lruCache= new LRUCache(3);
+
+        lruCache.put("A", "veri-a");
+
+        lruCache.put("B", "veri-b");
+
+        lruCache.put("C", "veri-c");
+
+        lruCache.get("A");
+
+        lruCache.put("D", "veri-d");
+
+        lruCache.get("B");
+
+        lruCache.put("E", "veri-e");
+
 
     }
 }
