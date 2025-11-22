@@ -3,6 +3,8 @@ package org.example;
 import org.example.example3.CompanyManagement;
 import org.example.example3.Employee;
 import org.example.example5.LRUCache;
+import org.example.example6.BagOptimization;
+import org.example.example6.Product;
 
 public class Main {
     public static void main(String[] args) {
@@ -38,6 +40,8 @@ public class Main {
 
 
 
+
+
 //        //  Urun
 
 //        Urun a=new Urun("a",100,20);
@@ -53,6 +57,9 @@ public class Main {
 //        depoYonetimi.urunEkle(d);
 //
 //        depoYonetimi.kritikUrunleriGoster();
+
+
+
 
 
 //        //  Sozlük
@@ -71,6 +78,8 @@ public class Main {
 //        sozluk.kelimeGecerliMİ("elmaz");
 
 //        sozluk.benzerKelimeBul("kasa");
+
+
 
 
 //        //  Employee
@@ -103,23 +112,46 @@ public class Main {
 
 
 
-//       //  Cache
 
-        LRUCache lruCache= new LRUCache(3);
 
-        lruCache.put("A", "veri-a");
+//        //  Cache
 
-        lruCache.put("B", "veri-b");
+//        LRUCache lruCache= new LRUCache(3);
+//
+//        lruCache.put("A", "veri-a");
+//
+//        lruCache.put("B", "veri-b");
+//
+//        lruCache.put("C", "veri-c");
+//
+//        lruCache.get("A");
+//
+//        lruCache.put("D", "veri-d");
+//
+//        lruCache.get("B");
+//
+//        lruCache.put("E", "veri-e");
 
-        lruCache.put("C", "veri-c");
 
-        lruCache.get("A");
 
-        lruCache.put("D", "veri-d");
 
-        lruCache.get("B");
+//        // Urun-Optimizasyon ** {Dinamik Programlama (DP)}
 
-        lruCache.put("E", "veri-e");
+        BagOptimization bagOptimization= new BagOptimization(15);
+
+        Product product= new Product("a",3,15);
+        Product product2= new Product("b",7,30);
+        Product product3= new Product("c",5,20);
+        Product product4= new Product("d",2,25);
+        Product product5= new Product("e",3,26);
+        Product product6= new Product("f",6,35);
+
+        bagOptimization.addProduct(product);
+        bagOptimization.addProduct(product2);
+        bagOptimization.addProduct(product3);
+        bagOptimization.addProduct(product4);
+        bagOptimization.addProduct(product5);
+        bagOptimization.addProduct(product6);
 
 
     }
