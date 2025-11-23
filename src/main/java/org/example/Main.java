@@ -5,6 +5,9 @@ import org.example.example3.Employee;
 import org.example.example5.LRUCache;
 import org.example.example6.BagOptimization;
 import org.example.example6.Product;
+import org.example.example7.CityMap;
+
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -137,22 +140,48 @@ public class Main {
 
 //        // Urun-Optimizasyon ** {Dinamik Programlama (DP)}
 
-        BagOptimization bagOptimization= new BagOptimization(15);
+//        BagOptimization bagOptimization= new BagOptimization(15);
+//
+//        Product product= new Product("a",3,15);
+//        Product product2= new Product("b",7,30);
+//        Product product3= new Product("c",5,20);
+//        Product product4= new Product("d",2,25);
+//        Product product5= new Product("e",3,26);
+//        Product product6= new Product("f",6,35);
+//
+//        bagOptimization.addProduct(product);
+//        bagOptimization.addProduct(product2);
+//        bagOptimization.addProduct(product3);
+//        bagOptimization.addProduct(product4);
+//        bagOptimization.addProduct(product5);
+//        bagOptimization.addProduct(product6);
 
-        Product product= new Product("a",3,15);
-        Product product2= new Product("b",7,30);
-        Product product3= new Product("c",5,20);
-        Product product4= new Product("d",2,25);
-        Product product5= new Product("e",3,26);
-        Product product6= new Product("f",6,35);
+//        // Dijkstra Algorithm
 
-        bagOptimization.addProduct(product);
-        bagOptimization.addProduct(product2);
-        bagOptimization.addProduct(product3);
-        bagOptimization.addProduct(product4);
-        bagOptimization.addProduct(product5);
-        bagOptimization.addProduct(product6);
+        CityMap map = new CityMap();
 
+        map.addEdge("A", "B", 6);
+        map.addEdge("A", "D", 1);
+        map.addEdge("B", "D", 2);
+        map.addEdge("B", "C", 5);
+        map.addEdge("C", "E", 5);
+        map.addEdge("D", "E", 1);
+        map.addEdge("D", "B", 2);
+        map.addEdge("D", "C", 4);
+
+        String source = "A";
+        Map<String, Integer> shortestDistances = map.findShortestPaths(source);
+
+        System.out.println("--- Shortest Travel Durations from " + source + " ---");
+
+        for (Map.Entry<String, Integer> entry : shortestDistances.entrySet()) {
+            String node = entry.getKey();
+            Integer distance = entry.getValue();
+
+            String output = (distance == Integer.MAX_VALUE) ? "Unreachable" : String.valueOf(distance);
+
+            System.out.printf("%s -> %s: %s\n", source, node, output);
+        }
 
     }
 }
