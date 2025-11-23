@@ -6,6 +6,8 @@ import org.example.example5.LRUCache;
 import org.example.example6.BagOptimization;
 import org.example.example6.Product;
 import org.example.example7.CityMap;
+import org.example.example8.ConsistentHash;
+import org.example.example8.Server;
 
 import java.util.Map;
 
@@ -156,32 +158,68 @@ public class Main {
 //        bagOptimization.addProduct(product5);
 //        bagOptimization.addProduct(product6);
 
+
+
+
+
 //        // Dijkstra Algorithm
 
-        CityMap map = new CityMap();
+//        CityMap map = new CityMap();
+//
+//        map.addEdge("A", "B", 6);
+//        map.addEdge("A", "D", 1);
+//        map.addEdge("B", "D", 2);
+//        map.addEdge("B", "C", 5);
+//        map.addEdge("C", "E", 5);
+//        map.addEdge("D", "E", 1);
+//        map.addEdge("D", "B", 2);
+//        map.addEdge("D", "C", 4);
+//
+//        String source = "A";
+//        Map<String, Integer> shortestDistances = map.findShortestPaths(source);
+//
+//        System.out.println("--- Shortest Travel Durations from " + source + " ---");
+//
+//        for (Map.Entry<String, Integer> entry : shortestDistances.entrySet()) {
+//            String node = entry.getKey();
+//            Integer distance = entry.getValue();
+//
+//            String output = (distance == Integer.MAX_VALUE) ? "Unreachable" : String.valueOf(distance);
+//
+//            System.out.printf("%s -> %s: %s\n", source, node, output);
+//        }
 
-        map.addEdge("A", "B", 6);
-        map.addEdge("A", "D", 1);
-        map.addEdge("B", "D", 2);
-        map.addEdge("B", "C", 5);
-        map.addEdge("C", "E", 5);
-        map.addEdge("D", "E", 1);
-        map.addEdge("D", "B", 2);
-        map.addEdge("D", "C", 4);
 
-        String source = "A";
-        Map<String, Integer> shortestDistances = map.findShortestPaths(source);
 
-        System.out.println("--- Shortest Travel Durations from " + source + " ---");
 
-        for (Map.Entry<String, Integer> entry : shortestDistances.entrySet()) {
-            String node = entry.getKey();
-            Integer distance = entry.getValue();
 
-            String output = (distance == Integer.MAX_VALUE) ? "Unreachable" : String.valueOf(distance);
+//        // Consistent Hashing
 
-            System.out.printf("%s -> %s: %s\n", source, node, output);
-        }
+
+        ConsistentHash hash = new ConsistentHash();
+
+        Server s1 = new Server("S1-DB");
+        Server s2 = new Server("S2-DB");
+        Server s3 = new Server("S3-DB");
+
+        hash.addServer(s1);
+        hash.addServer(s2);
+        hash.addServer(s3);
+
+        System.out.println("\n--- VERİ ATAMASI ---");
+        System.out.println("Key1 atandı: " + hash.assignKeyToServer("UserKey1"));
+        System.out.println("Key2 atandı: " + hash.assignKeyToServer("UserKey2"));
+        System.out.println("Key3 atandı: " + hash.assignKeyToServer("OrderKey3"));
+        System.out.println("Key4 atandı: " + hash.assignKeyToServer("DataKey4"));
+
+        hash.printLoad();
+
+        Server s4 = new Server("S4-New");
+        hash.addServer(s4);
+        System.out.printf("S4 eklendi. S1'e atanması beklenen 'UserKey1' yeniden atanıyor: %s\n",
+                hash.assignKeyToServer("UserKey1"));
+
+        hash.printLoad();
 
     }
 }
