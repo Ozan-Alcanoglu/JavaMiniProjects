@@ -8,6 +8,8 @@ import org.example.example6.Product;
 import org.example.example7.CityMap;
 import org.example.example8.ConsistentHash;
 import org.example.example8.Server;
+import org.example.example9.BST;
+import org.example.example9.Node;
 
 import java.util.Map;
 
@@ -196,30 +198,60 @@ public class Main {
 //        // Consistent Hashing
 
 
-        ConsistentHash hash = new ConsistentHash();
+//        ConsistentHash hash = new ConsistentHash();
 
-        Server s1 = new Server("S1-DB");
-        Server s2 = new Server("S2-DB");
-        Server s3 = new Server("S3-DB");
+//        Server s1 = new Server("S1-DB");
+//        Server s2 = new Server("S2-DB");
+//        Server s3 = new Server("S3-DB");
+//
+//        hash.addServer(s1);
+//        hash.addServer(s2);
+//        hash.addServer(s3);
+//
+//        System.out.println("\n--- VERİ ATAMASI ---");
+//        System.out.println("Key1 atandı: " + hash.assignKeyToServer("UserKey1"));
+//        System.out.println("Key2 atandı: " + hash.assignKeyToServer("UserKey2"));
+//        System.out.println("Key3 atandı: " + hash.assignKeyToServer("OrderKey3"));
+//        System.out.println("Key4 atandı: " + hash.assignKeyToServer("DataKey4"));
+//
+//        hash.printLoad();
+//
+//        Server s4 = new Server("S4-New");
+//        hash.addServer(s4);
+//        System.out.printf("S4 eklendi. S1'e atanması beklenen 'UserKey1' yeniden atanıyor: %s\n",
+//                hash.assignKeyToServer("UserKey1"));
+//
+//        hash.printLoad();
 
-        hash.addServer(s1);
-        hash.addServer(s2);
-        hash.addServer(s3);
 
-        System.out.println("\n--- VERİ ATAMASI ---");
-        System.out.println("Key1 atandı: " + hash.assignKeyToServer("UserKey1"));
-        System.out.println("Key2 atandı: " + hash.assignKeyToServer("UserKey2"));
-        System.out.println("Key3 atandı: " + hash.assignKeyToServer("OrderKey3"));
-        System.out.println("Key4 atandı: " + hash.assignKeyToServer("DataKey4"));
 
-        hash.printLoad();
 
-        Server s4 = new Server("S4-New");
-        hash.addServer(s4);
-        System.out.printf("S4 eklendi. S1'e atanması beklenen 'UserKey1' yeniden atanıyor: %s\n",
-                hash.assignKeyToServer("UserKey1"));
 
-        hash.printLoad();
 
+
+//        // BST
+
+
+
+
+        Node node=new Node(50);
+
+        BST bst= new BST(node);
+
+        Node node1=new Node(30);
+        Node node2=new Node(70);
+        Node node3=new Node(20);
+        Node node4=new Node(40);
+        Node node5=new Node(60);
+        Node node6=new Node(80);
+
+        bst.add(node1);
+        bst.add(node2);
+        bst.add(node3);
+        bst.add(node4);
+        bst.add(node5);
+        bst.add(node6);
+
+        bst.inorderTraversal();
     }
 }
