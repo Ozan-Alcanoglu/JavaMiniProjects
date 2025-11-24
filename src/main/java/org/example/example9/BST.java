@@ -73,6 +73,51 @@ public class BST {
         System.out.println(list);
     }
 
+    private int findMinValue(Node root) {
+        int minValue = root.getKey();
+        while (root.getLeft() != null) {
+            minValue = root.getLeft().getKey();
+            root = root.getLeft();
+        }
+        return minValue;
+    }
+
+    public void delete(int key) {
+        this.root = deleteRecursive(this.root, key);
+        System.out.println(key + " başarıyla silindi (veya bulunamadı).");
+    }
+
+    private Node deleteRecursive(Node current, int key) {
+        if (current == null) {
+            return null;
+        }
+
+        if (key < current.getKey()) {
+            current.setLeft(deleteRecursive(current.getLeft(), key));
+            return current;
+        }
+
+        if (key > current.getKey()) {
+            current.setRight(deleteRecursive(current.getRight(), key));
+            return current;
+        }
+
+        if (current.getLeft() == null) {
+            return current.getRight();
+        }
+
+        if (current.getRight() == null) {
+            return current.getLeft();
+        }
+
+        int smallestValue = findMinValue(current.getRight());
+        current.setKey(smallestValue);
+
+        current.setRight(deleteRecursive(current.getRight(), smallestValue));
+
+        return current;
+    }
+
 
 
 

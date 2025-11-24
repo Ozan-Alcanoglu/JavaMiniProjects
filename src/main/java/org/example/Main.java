@@ -253,5 +253,10 @@ public class Main {
         bst.add(node6);
 
         bst.inorderTraversal();
+
+        bst.delete(40);
+
+        bst.inorderTraversal();
+
     }
 }
