@@ -9,33 +9,69 @@ public class BST {
     private Node root;
 
     public BST(Node root){
-        this.root=root;
+        this.root = root;
     }
 
+    private int getHeight(Node node) {
+        return (node == null) ? 0 : node.height;
+    }
 
-    public void add(Node node){
-        Node current = root;
+    private void updateHeight(Node node) {
+        node.height = 1 + Math.max(getHeight(node.getLeft()), getHeight(node.getRight()));
+    }
 
-        while (true){
-            if (node.getKey() < current.getKey()){
-                if (current.getLeft() == null){
-                    current.setLeft(node);
-                    return;
-                }
-                current = current.getLeft();
-            }
-            else if (node.getKey() > current.getKey()){
-                if (current.getRight() == null){
-                    current.setRight(node);
-                    return;
-                }
-                current = current.getRight();
-            }
-            else {
-                System.out.println("kayıt mevcut");
-                return;
-            }
+    private int getBalanceFactor(Node node) {
+        return (node == null) ? 0 :
+                getHeight(node.getLeft()) - getHeight(node.getRight());
+    }
+
+    public void add(Node node) {
+        root = addRecursive(root, node.getKey());
+    }
+
+    private Node addRecursive(Node current, int key) {
+
+        if (current == null) {
+            return new Node(key);
         }
+
+        if (key < current.getKey()) {
+            current.setLeft(addRecursive(current.getLeft(), key));
+        }
+        else if (key > current.getKey()) {
+            current.setRight(addRecursive(current.getRight(), key));
+        }
+        else {
+            System.out.println("kayıt mevcut");
+            return current;
+        }
+
+        updateHeight(current);
+
+        int bf = getBalanceFactor(current);
+
+
+        if (bf > 1 && key < current.getLeft().getKey()) {
+            return rotateRight(current);
+        }
+
+        if (bf < -1 && key > current.getRight().getKey()) {
+            return rotateLeft(current);
+        }
+
+
+        return current;
+    }
+
+    private void updateTreeHeights(Node node) {
+        if (node == null) return;
+
+        updateTreeHeights(node.getLeft());
+        updateTreeHeights(node.getRight());
+
+        updateHeight(node);
+
+        System.out.println("Node " + node.getKey() + " BF = " + getBalanceFactor(node));
     }
 
     public boolean searchKey(int key) {
@@ -84,6 +120,9 @@ public class BST {
 
     public void delete(int key) {
         this.root = deleteRecursive(this.root, key);
+
+        updateTreeHeights(root);
+
         System.out.println(key + " başarıyla silindi (veya bulunamadı).");
     }
 
@@ -118,7 +157,31 @@ public class BST {
         return current;
     }
 
+    public Node rotateRight(Node y) {
+        Node x = y.getLeft();
+        Node T2 = x.getRight();
+
+        x.setRight(y);
+        y.setLeft(T2);
+
+        updateHeight(y);
+        updateHeight(x);
+
+        return x;
+    }
 
 
+    public Node rotateLeft(Node x) {
+        Node y = x.getRight();
+        Node T2 = y.getLeft();
+
+        y.setLeft(x);
+        x.setRight(T2);
+
+        updateHeight(x);
+        updateHeight(y);
+
+        return y;
+    }
 
 }
